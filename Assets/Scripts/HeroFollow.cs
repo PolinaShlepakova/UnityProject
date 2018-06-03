@@ -1,28 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HeroFollow : MonoBehaviour {
 
-	public HeroRabbit rabbit;
+	public HeroRabbit Rabbit;
 
 	void Update () {
-		//Отримуємо доступ до компонента Transform
-		//це Скорочення до GetComponent<Transform>
-		Transform rabbit_transform = rabbit.transform;
+		Transform rabbitTransform = Rabbit.transform;
+		Transform cameraTransform = transform;
 
-		//Отримуємо доступ до компонента Transform камери
-		Transform camera_transform = this.transform;
+		Vector3 rabbitPosition = rabbitTransform.position;
+		Vector3 cameraPosition = cameraTransform.position;
 
-		//Отримуємо доступ до координат кролика
-		Vector3 rabbit_position = rabbit_transform.position;
-		Vector3 camera_position = camera_transform.position;
+		// move Camera along X and Y
+		cameraPosition.x = rabbitPosition.x;
+		cameraPosition.y = rabbitPosition.y;
 
-		//Рухаємо камеру тільки по X,Y
-		camera_position.x = rabbit_position.x;
-		camera_position.y = rabbit_position.y;
-
-		//Встановлюємо координати камери
-		camera_transform.position = camera_position;
+		// set camera's coordinates
+		cameraTransform.position = cameraPosition;
 	}
 }
