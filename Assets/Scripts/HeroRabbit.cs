@@ -13,8 +13,8 @@ public class HeroRabbit : MonoBehaviour
 		myBody = this.GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	// used for physics calculations
+	void FixedUpdate () {
 		//[-1, 1]
 		float value = Input.GetAxis("Horizontal");
 		if (Mathf.Abs(value) > 0) {
@@ -24,10 +24,12 @@ public class HeroRabbit : MonoBehaviour
 		}
 		
 		SpriteRenderer sr = GetComponent<SpriteRenderer>();
-		if(value < 0) {
+		if (value < 0) {
 			sr.flipX = true;
 		} else if(value > 0) {
 			sr.flipX = false;
 		}
 	}
+	
+	
 }
