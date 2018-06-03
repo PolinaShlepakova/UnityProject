@@ -14,7 +14,7 @@ public class HeroRabbit : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		//Зберігаємо позицію кролика на початку
+		// save rabbit's starting position
 		LevelController.Current.SetStartPosition(transform.position);
 		_myBody = GetComponent<Rigidbody2D>();
 	}
