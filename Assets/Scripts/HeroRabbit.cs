@@ -19,7 +19,7 @@ public class HeroRabbit : MonoBehaviour
 		_myBody = GetComponent<Rigidbody2D>();
 	}
 	
-<<<<<<< HEAD
+
 	// Update is called once per frame (used for animations)
 	void Update () {
 		Animator animator = GetComponent<Animator>();
@@ -51,10 +51,6 @@ public class HeroRabbit : MonoBehaviour
 	}
 
 	private void UpdateHorizontalPosition() {
-=======
-	// used for physics calculations
-	void FixedUpdate () {
->>>>>>> 97c14375c6d71449efd13eb659608a5451bc37de
 		//[-1, 1]
 		float value = Input.GetAxis("Horizontal");
 		
@@ -73,7 +69,7 @@ public class HeroRabbit : MonoBehaviour
 			sr.flipX = false;
 		}
 	}
-<<<<<<< HEAD
+
 
 	private void UpdateJumpStatus() {
 		Vector3 from = transform.position + Vector3.up * 0.3f;
@@ -108,8 +104,5 @@ public class HeroRabbit : MonoBehaviour
 			}
 		}
 	}
-=======
-	
-	
->>>>>>> 97c14375c6d71449efd13eb659608a5451bc37de
+
 }
