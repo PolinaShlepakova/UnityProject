@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212556724838396520}
   - component: {fileID: 68512942524633616}
   m_Layer: 29
-  m_Name: Platform-01
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

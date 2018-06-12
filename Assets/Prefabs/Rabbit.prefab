@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
-  MaxJumpTime: 2
-  JumpSpeed: 2
+  MaxJumpTime: 1
+  JumpSpeed: 3
 --- !u!212 &212043050156352672
 SpriteRenderer:
   m_ObjectHideFlags: 1
