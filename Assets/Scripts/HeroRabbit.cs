@@ -1,57 +1,81 @@
-﻿using UnityEngine;
+﻿using System.CodeDom;
+using System.Collections;
+using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
     public float Speed = 1;
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
-    Transform HeroParent = null;
+
+    private static readonly float Growth = 0.5f;
+    private static readonly Vector3 UsualScale = new Vector3(1, 1, 0);
+    private static readonly Color UsualColor = Color.white;
+    private static readonly Color BombInvulnerableColor = new Color(1f, 0.6f, 0.6f); 
+    private static readonly float BombInvulnerableTime = 4f;
 
     private Rigidbody2D _myBody;
-    private bool _isGrounded = false;
-    private bool _jumpActive = false;
-    private float _jumpTime = 0f;
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+    private Transform _heroParent;
+    private bool _isGrounded;
+    private bool _jumpActive;
+    private float _jumpTime;
+    private bool _isBig;
+    private bool _isBombInvulnerable;
 
+    public bool IsBig {
+        get { return _isBig; }
+    }
+
+    public bool IsBombInvulnerable {
+        get { return _isBombInvulnerable; }
+    }
 
     // Use this for initialization
     private void Start() {
         // save rabbit's starting position
         LevelController.Current.SetStartPosition(transform.position);
         _myBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         // save standard parent GameObject
-        HeroParent = transform.parent;
+        _heroParent = transform.parent;
+        _isBig = false;
     }
 
 
     // Update is called once per frame (used for animations)
     private void Update() {
-        AnimateRun();
-        AnimateJump();
+        if (!_animator.GetBool("dead")) {
+            AnimateRun();
+            AnimateJump();
+        }
     }
 
     // used for physics calculations
     private void FixedUpdate() {
-        UpdateHorizontalPosition();
-        UpdateGroundedStatus();
+        if (!_animator.GetBool("dead")) {
+            UpdateHorizontalPosition();
+            UpdateGroundedStatus();
+        }
     }
 
     private void AnimateRun() {
-        Animator animator = GetComponent<Animator>();
         float value = Input.GetAxis("Horizontal");
         if (Mathf.Abs(value) > 0) {
-            animator.SetBool("run", true);
+            _animator.SetBool("run", true);
         }
         else {
-            animator.SetBool("run", false);
+            _animator.SetBool("run", false);
         }
     }
 
     private void AnimateJump() {
-        Animator animator = GetComponent<Animator>();
         if (_isGrounded) {
-            animator.SetBool("jump", false);
+            _animator.SetBool("jump", false);
         }
         else {
-            animator.SetBool("jump", true);
+            _animator.SetBool("jump", true);
         }
     }
 
@@ -67,12 +91,11 @@ public class HeroRabbit : MonoBehaviour {
         }
 
         // update direction
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (value < 0) {
-            sr.flipX = true;
+            _spriteRenderer.flipX = true;
         }
         else if (value > 0) {
-            sr.flipX = false;
+            _spriteRenderer.flipX = false;
         }
     }
 
@@ -83,7 +106,7 @@ public class HeroRabbit : MonoBehaviour {
         int layerId = 1 << LayerMask.NameToLayer("Ground");
 
         // check if line goes through Collider with layer "Ground"
-        RaycastHit2D hit = Physics2D.Linecast( from, to, layerId);
+        RaycastHit2D hit = Physics2D.Linecast(from, to, layerId);
         if (hit) {
             _isGrounded = true;
             // check if grounded to a platform
@@ -95,7 +118,7 @@ public class HeroRabbit : MonoBehaviour {
         else {
             _isGrounded = false;
             // unstick from platform
-            SetNewParent(transform, HeroParent);
+            SetNewParent(transform, _heroParent);
         }
 
         // if button was just pressed
@@ -118,6 +141,53 @@ public class HeroRabbit : MonoBehaviour {
                 _jumpTime = 0;
             }
         }
+    }
+
+    public void Grow() {
+        if (!_isBig) {
+            _myBody.transform.localScale += new Vector3(Growth, Growth, 0);
+            _isBig = true;
+        }
+    }
+
+    public void Diminish() {
+        if (_isBig) {
+            _myBody.transform.localScale = UsualScale;
+            _isBig = false;
+            MakeBombInvulnerable();
+            Invoke("MakeBombVulnerable", BombInvulnerableTime);
+        }
+    }
+
+    public void MakeBombInvulnerable() {
+        if (!_isBombInvulnerable) {
+            _isBombInvulnerable = true;
+            _spriteRenderer.color = BombInvulnerableColor;
+        }
+    }
+
+    public void MakeBombVulnerable() {
+        if (_isBombInvulnerable) {
+            _isBombInvulnerable = false;
+            _spriteRenderer.color = UsualColor;
+        }
+    }
+
+    public void Die() {
+        _jumpActive = false;
+        _jumpTime = 0;
+        _animator.SetBool("dead", true);
+        StartCoroutine(AnimateDeath());
+    }
+
+    public void Revive() {
+        _animator.SetBool("dead", false);
+    }
+
+    private IEnumerator AnimateDeath() {
+        // _animator.SetBool("dead", true);
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
+        LevelController.Current.OnRabbitDeath(this);
     }
 
     static void SetNewParent(Transform obj, Transform newParent) {
