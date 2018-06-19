@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
 public class Collectable : MonoBehaviour {
-    
+    protected virtual void FixedUpdate() {
+        
+    }
+
     protected virtual void OnRabbitHit(HeroRabbit rabbit) {
         CollectedHide();
     }

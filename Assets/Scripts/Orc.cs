@@ -48,7 +48,7 @@ public abstract class Orc : MonoBehaviour {
     }
 
     // used for physics calculations
-    protected void FixedUpdate() {
+    protected virtual void FixedUpdate() {
         if (!_animator.GetBool("dead")) {
             UpdateMode();
             UpdateHorizontalPosition();
@@ -94,7 +94,7 @@ public abstract class Orc : MonoBehaviour {
         }
     }
 
-    private float GetDirection() {
+    protected float GetDirection() {
         switch (_mode) {
             case Mode.GoToA:
                 return -1;
