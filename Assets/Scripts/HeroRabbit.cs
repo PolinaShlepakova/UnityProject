@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
@@ -7,6 +6,8 @@ public class HeroRabbit : MonoBehaviour {
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
 
+    public static HeroRabbit LastRabbit;
+    
     private static readonly float Growth = 0.5f;
     private static readonly Vector3 UsualScale = new Vector3(1, 1, 0);
     private static readonly Color UsualColor = Color.white;
@@ -41,6 +42,7 @@ public class HeroRabbit : MonoBehaviour {
         // save standard parent GameObject
         _heroParent = transform.parent;
         _isBig = false;
+        LastRabbit = this;
     }
 
 
@@ -129,17 +131,22 @@ public class HeroRabbit : MonoBehaviour {
         if (_jumpActive) {
             // if button is still held
             if (Input.GetButton("Jump")) {
-                _jumpTime += Time.fixedDeltaTime;
-                if (_jumpTime < MaxJumpTime) {
-                    Vector2 vel = _myBody.velocity;
-                    vel.y = JumpSpeed * (1.0f - _jumpTime / MaxJumpTime);
-                    _myBody.velocity = vel;
-                }
+                Jump();
             }
             else {
                 _jumpActive = false;
                 _jumpTime = 0;
             }
+        }
+    }
+
+    public void Jump() {
+        _jumpActive = true;
+        _jumpTime += Time.fixedDeltaTime;
+        if (_jumpTime < MaxJumpTime) {
+            Vector2 vel = _myBody.velocity;
+            vel.y = JumpSpeed * (1.0f - _jumpTime / MaxJumpTime);
+            _myBody.velocity = vel;
         }
     }
 
@@ -176,6 +183,8 @@ public class HeroRabbit : MonoBehaviour {
     public void Die() {
         _jumpActive = false;
         _jumpTime = 0;
+        _animator.SetBool("run", false);
+        _animator.SetBool("jump", false);
         _animator.SetBool("dead", true);
         StartCoroutine(AnimateDeath());
     }
