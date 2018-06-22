@@ -44,6 +44,7 @@ public abstract class Orc : MonoBehaviour {
         }
 
         _rabbitWinHeight = GetComponent<BoxCollider2D>().size.y;
+        _rabbitWinHeight *= 0.8f;
         _speed = NormalSpeed;
     }
 
