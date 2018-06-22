@@ -165,6 +165,8 @@ public class HeroRabbit : MonoBehaviour {
             Invoke("MakeBombVulnerable", BombInvulnerableTime);
         }
     }
+    
+    
 
     public void MakeBombInvulnerable() {
         if (!_isBombInvulnerable) {
@@ -191,6 +193,10 @@ public class HeroRabbit : MonoBehaviour {
 
     public void Revive() {
         _animator.SetBool("dead", false);
+        if (_isBig) {
+            _myBody.transform.localScale = UsualScale;
+            _isBig = false;
+        }
     }
 
     private IEnumerator AnimateDeath() {

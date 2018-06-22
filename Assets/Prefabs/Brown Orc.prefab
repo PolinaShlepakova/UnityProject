@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1293340748127460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.91, y: -1.51, z: 0.2}
+  m_LocalPosition: {x: 89.71, y: -0.38, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.88}
+  m_Offset: {x: -0.02, y: 0.92}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.6}
+  m_Size: {x: 1.07, y: 1.7}
   m_EdgeRadius: 0
 --- !u!95 &95002524323933688
 Animator:
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112ceec1b4a7f4243a7341082511f3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalSpeed: 1
+  NormalSpeed: 0.5
   MoveBy: {x: -3, y: 0, z: 0}
   AttackRadius: 3
   PrefabCarrot: {fileID: 1023857148363576, guid: 6ce7f339e60a1c04db90ec842c1f7ef3,

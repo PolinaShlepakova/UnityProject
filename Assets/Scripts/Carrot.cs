@@ -16,8 +16,15 @@ public class Carrot : Collectable {
     }
 
     protected override void OnRabbitHit(HeroRabbit rabbit) {
-        rabbit.Die();
-        CollectedHide();
+        if (!rabbit.IsBombInvulnerable) {
+            if (rabbit.IsBig) {
+                rabbit.Diminish();
+            }
+            else {
+                rabbit.Die();
+            }
+            CollectedHide();
+        }
     }
 
     public void Launch(float direction) {
