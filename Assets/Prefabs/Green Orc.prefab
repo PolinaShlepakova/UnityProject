@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61538556055832724}
   - component: {fileID: 95625124743199956}
   - component: {fileID: 114508189661106230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Green Orc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalSpeed: 1
-  MoveBy: {x: -3, y: 0, z: 0}
+  MoveBy: {x: -5, y: 0, z: 0}
   RunningSpeed: 1.5
 --- !u!212 &212716983990355624
 SpriteRenderer:
