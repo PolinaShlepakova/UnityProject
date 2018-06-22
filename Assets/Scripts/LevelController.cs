@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour {
+
+	public int MaxLives = 3;
 	
 	public static LevelController Current;
 	
@@ -10,6 +13,7 @@ public class LevelController : MonoBehaviour {
 	private bool _crystalRed;
 	private bool _crystalBlue;
 	private bool _crystalGreen;
+	private int _lives = 3;
 
 	void Awake() {
 		Current = this;
@@ -20,9 +24,14 @@ public class LevelController : MonoBehaviour {
 	}
 	
 	public void OnRabbitDeath(HeroRabbit rabbit) {
-		rabbit.Revive();
-		// on rabbit death return to the starting position
-		rabbit.transform.position = _startingPosition;
+		if (--_lives > 0) {
+			rabbit.Revive();
+			// on rabbit death return to the starting position
+			rabbit.transform.position = _startingPosition;
+		}
+		else {
+			SceneManager.LoadScene("ChooseLevel");
+		}
 	}
 
 	public void AddCoin() {
@@ -65,5 +74,9 @@ public class LevelController : MonoBehaviour {
 
 	public int Coins {
 		get { return _coins; }
+	}
+
+	public int Lifes {
+		get { return _lives; }
 	}
 }
