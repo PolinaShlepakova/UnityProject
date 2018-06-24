@@ -21,7 +21,7 @@ public class Collectable : MonoBehaviour {
     public void CollectedHide() {
         GetComponent<SpriteRenderer>().sprite = null;
         if (SoundManager.Instance.IsSoundOn() && Audio != null) {
-            Audio.Play();
+            Audio.PlayOneShot(Audio.clip);
         }
 
         StartCoroutine(WaitToHide());
