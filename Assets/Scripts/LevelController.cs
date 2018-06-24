@@ -19,6 +19,8 @@ public class LevelController : MonoBehaviour {
 	private int _fruitsOverall;
 	private string _statsKey;
 
+	private float _savedTimeScale;
+
 	public int FruitsOverall {
 		get { return _fruitsOverall; }
 		set { _fruitsOverall = value; }
@@ -47,7 +49,7 @@ public class LevelController : MonoBehaviour {
 			rabbit.transform.position = _startingPosition;
 		}
 		else {
-			SceneManager.LoadScene("ChooseLevel");
+			FailLevel();
 		}
 	}
 
@@ -95,8 +97,24 @@ public class LevelController : MonoBehaviour {
 		
 		PlayerPrefs.Save();
 		
-		HeroRabbit.LastRabbit.Freeze();
+		Pause();
 		WinLevel.Current.Show();
+	}
+	
+	public void FailLevel() {
+		Pause();
+		LoseLevel.Current.Show();
+	}
+	
+	public void Pause() {
+		_savedTimeScale = Time.timeScale;
+		Time.timeScale = 0;
+		// AudioListener.pause = true;
+	}
+  
+	public void UnPause() {
+		Time.timeScale = _savedTimeScale;
+		// AudioListener.pause = false;
 	}
 	
 	public bool CrystalGreen {

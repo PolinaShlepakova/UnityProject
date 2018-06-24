@@ -7,4 +7,9 @@ public class ButtonController : MonoBehaviour {
 	public void ChangeToScene(string scene) {
 		SceneManager.LoadScene(scene);
 	}
+
+	public void ChangeToSceneAndUnPause(string scene) {
+		LevelController.Current.UnPause();
+		ChangeToScene(scene);
+	}
 }

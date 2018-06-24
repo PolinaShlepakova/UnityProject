@@ -48,10 +48,12 @@ public class WinLevel : MonoBehaviour {
 	}
 
 	public void OnReplayButtonClicked() {
+		LevelController.Current.UnPause();
 		SceneManager.LoadScene("Level" + LevelController.Current.Level);
 	}
 
 	public void OnMenuButtonClicked() {
+		LevelController.Current.UnPause();
 		SceneManager.LoadScene("ChooseLevel");
 	}
 	
