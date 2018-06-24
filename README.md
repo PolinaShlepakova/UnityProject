@@ -4,3 +4,4 @@ Completed tasks:
 - task 3 (+ bonus)
 - task 4 (+ bonus)
 - task 5
+- task 6
