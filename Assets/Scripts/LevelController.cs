@@ -63,6 +63,12 @@ public class LevelController : MonoBehaviour {
 		}
 	}
 
+	public void AddLife() {
+		if (_lives < 3) {
+			_lives++;
+		}
+	}
+
 	public void AddCoin() {
 		_coins++;
 	}
