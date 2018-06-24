@@ -13,12 +13,14 @@ public abstract class Orc : MonoBehaviour {
     protected BoxCollider2D _boxCollider;
     protected Mode _mode;
     protected Vector3 _pointA;
-
     protected Vector3 _pointB;
 
     // if rabbit is higher than orc by at least this amount, the rabbit kills orc
     protected float _rabbitWinHeight;
     protected float _speed;
+
+    protected static readonly float _timeBetweenFlips = 0.3f;
+    protected float _lastFlip;
 
 
     protected enum Mode {
@@ -46,6 +48,7 @@ public abstract class Orc : MonoBehaviour {
         _rabbitWinHeight = GetComponent<BoxCollider2D>().size.y;
         _rabbitWinHeight *= 0.8f;
         _speed = NormalSpeed;
+        _lastFlip = Time.time;
     }
 
     // used for physics calculations
@@ -67,12 +70,15 @@ public abstract class Orc : MonoBehaviour {
             _myBody.velocity = vel;
         }
 
-        // update direction
-        if (value < 0) {
-            _spriteRenderer.flipX = false;
-        }
-        else if (value > 0) {
-            _spriteRenderer.flipX = true;
+        UpdateDirection(value);
+    }
+
+    private void UpdateDirection(float value) {
+        bool flip = _spriteRenderer.flipX;
+        bool newFlip = value >= 0;
+        if (flip != newFlip && Time.time - _lastFlip > _timeBetweenFlips) {
+            _spriteRenderer.flipX = newFlip;
+            _lastFlip = Time.time;
         }
     }
 

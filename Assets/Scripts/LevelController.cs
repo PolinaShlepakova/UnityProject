@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour {
 
 	public int MaxLives = 3;
+	public int Level;
 	
 	public static LevelController Current;
 	
@@ -14,9 +15,25 @@ public class LevelController : MonoBehaviour {
 	private bool _crystalBlue;
 	private bool _crystalGreen;
 	private int _lives = 3;
+	private LevelStat _stats;
+	private int _fruitsOverall;
+	private string _statsKey;
+
+	public int FruitsOverall {
+		get { return _fruitsOverall; }
+		set { _fruitsOverall = value; }
+	}
 
 	void Awake() {
 		Current = this;
+		_statsKey = "stats" + Level;
+		string str = PlayerPrefs.GetString(_statsKey, null);
+		_stats = JsonUtility.FromJson<LevelStat>(str);
+		if (_stats == null) {
+			_stats = new LevelStat();
+		}
+
+		_fruits = _stats.CollectedFruits.Count;
 	}
 	
 	public void SetStartPosition(Vector3 pos) {
@@ -38,8 +55,15 @@ public class LevelController : MonoBehaviour {
 		_coins++;
 	}
 	
-	public void AddFruit() {
-		_fruits++;
+	public void AddFruit(int id) {
+		if (!IsFruitCollectedBefore(id)) {
+			_fruits++;
+			_stats.CollectedFruits.Add(id);
+		}
+	}
+
+	public bool IsFruitCollectedBefore(int id) {
+		return _stats.CollectedFruits.Contains(id);
 	}
 
 	public void AddCrystal(Crystal.CrystalColor color) {
@@ -54,6 +78,22 @@ public class LevelController : MonoBehaviour {
 				_crystalGreen = true;
 				break;
 		}
+	}
+
+	public void PassLevel() {
+		// save coins
+		int prevCoins = PlayerPrefs.GetInt("coins", 0);
+		PlayerPrefs.SetInt("coins", _coins + prevCoins);
+		
+		// update stats
+		_stats.LevelPassed = true;
+		_stats.HasCrystals = _crystalBlue && _crystalGreen && _crystalRed;
+		_stats.HasAllFruits = _stats.CollectedFruits.Count == FruitsOverall;
+		// save stats
+		string str = JsonUtility.ToJson(_stats);
+		PlayerPrefs.SetString(_statsKey, str);
+		
+		PlayerPrefs.Save();
 	}
 	
 	public bool CrystalGreen {

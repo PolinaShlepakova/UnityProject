@@ -18,10 +18,11 @@ public class BrownOrc : Orc {
 	}
 
 	protected override bool IsTargetInZone() {
-		float rabbitPosX = HeroRabbit.LastRabbit.transform.position.x;
-		float myPosX = transform.position.x;
+		Vector3 rabbitPos = HeroRabbit.LastRabbit.transform.position;
+		Vector3 myPos = transform.position;
 		// rabit is within Attack radius from orc
-		return Mathf.Abs(rabbitPosX - myPosX) <= AttackRadius;
+		return Mathf.Abs(rabbitPos.x - myPos.x) <= AttackRadius && 
+		       Mathf.Abs(rabbitPos.y - myPos.y) < _rabbitWinHeight;
 	}
 
 	protected override float GetAttackDirection() {

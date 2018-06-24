@@ -166,8 +166,6 @@ public class HeroRabbit : MonoBehaviour {
         }
     }
     
-    
-
     public void MakeBombInvulnerable() {
         if (!_isBombInvulnerable) {
             _isBombInvulnerable = true;

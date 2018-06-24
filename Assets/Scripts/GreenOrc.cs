@@ -37,7 +37,9 @@ public class GreenOrc : Orc {
 
     protected override bool IsTargetInZone() {
         Vector3 rabbitPos = HeroRabbit.LastRabbit.transform.position;
-        if (rabbitPos.x > _pointA.x && rabbitPos.x < _pointB.x) {
+        Vector3 myPos = transform.position;
+        if (rabbitPos.x > _pointA.x && rabbitPos.x < _pointB.x && 
+            Mathf.Abs(rabbitPos.y - myPos.y) < _rabbitWinHeight) {
             return true;
         }
         return false;
