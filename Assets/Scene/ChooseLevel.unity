@@ -811,16 +811,6 @@ Prefab:
       propertyPath: m_Name
       value: Door 2
       objectReference: {fileID: 0}
-    - target: {fileID: 212606558605465310, guid: 02234b709cd4dbb43b30f83e35c8974a,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 212606558605465310, guid: 02234b709cd4dbb43b30f83e35c8974a,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 212394879516081066, guid: 02234b709cd4dbb43b30f83e35c8974a,
         type: 2}
       propertyPath: m_Sprite
@@ -829,60 +819,8 @@ Prefab:
         type: 3}
     - target: {fileID: 114688782605232434, guid: 02234b709cd4dbb43b30f83e35c8974a,
         type: 2}
-      propertyPath: Scene
-      value: Level2
-      objectReference: {fileID: 0}
-    - target: {fileID: 212089727057538208, guid: 02234b709cd4dbb43b30f83e35c8974a,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e0def08d52fd64a66912611ff0c1b1ee,
-        type: 3}
-    - target: {fileID: 212448168156185744, guid: 02234b709cd4dbb43b30f83e35c8974a,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 260c4330f58a944b8bd7e26558af3ca8,
-        type: 3}
-    - target: {fileID: 4746223961234610, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.864
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746223961234610, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.602
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746223961234610, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.1975448
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746223961234610, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.1975448
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746223961234610, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.1975448
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430299982774522, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.529
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430299982774522, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.617
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430299982774522, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0916474
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430299982774522, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0916474
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430299982774522, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.0916474
+      propertyPath: Level
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 02234b709cd4dbb43b30f83e35c8974a, type: 2}
@@ -1682,6 +1620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxLives: 3
+  Level: 0
 --- !u!4 &1657906214
 Transform:
   m_ObjectHideFlags: 0

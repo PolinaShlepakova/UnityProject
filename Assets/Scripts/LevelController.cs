@@ -87,7 +87,7 @@ public class LevelController : MonoBehaviour {
 		
 		// update stats
 		_stats.LevelPassed = true;
-		_stats.HasCrystals = _crystalBlue && _crystalGreen && _crystalRed;
+		_stats.HasCrystals = _crystalBlue && _crystalGreen && _crystalRed || _stats.HasCrystals;
 		_stats.HasAllFruits = _stats.CollectedFruits.Count == FruitsOverall;
 		// save stats
 		string str = JsonUtility.ToJson(_stats);
