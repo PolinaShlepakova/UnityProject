@@ -180,6 +180,10 @@ public class HeroRabbit : MonoBehaviour {
         }
     }
 
+    public void Freeze() {
+        _myBody.constraints = RigidbodyConstraints2D.FreezePosition;
+    }
+
     public void Die() {
         _jumpActive = false;
         _jumpTime = 0;

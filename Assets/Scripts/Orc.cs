@@ -19,7 +19,7 @@ public abstract class Orc : MonoBehaviour {
     protected float _rabbitWinHeight;
     protected float _speed;
 
-    protected static readonly float _timeBetweenFlips = 0.3f;
+    protected static readonly float _timeBetweenFlips = 1f;
     protected float _lastFlip;
 
 

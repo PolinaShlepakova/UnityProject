@@ -94,6 +94,9 @@ public class LevelController : MonoBehaviour {
 		PlayerPrefs.SetString(_statsKey, str);
 		
 		PlayerPrefs.Save();
+		
+		HeroRabbit.LastRabbit.Freeze();
+		WinLevel.Current.Show();
 	}
 	
 	public bool CrystalGreen {

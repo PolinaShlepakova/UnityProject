@@ -21,8 +21,9 @@ public class BrownOrc : Orc {
 		Vector3 rabbitPos = HeroRabbit.LastRabbit.transform.position;
 		Vector3 myPos = transform.position;
 		// rabit is within Attack radius from orc
-		return Mathf.Abs(rabbitPos.x - myPos.x) <= AttackRadius && 
-		       Mathf.Abs(rabbitPos.y - myPos.y) < _rabbitWinHeight;
+		return Mathf.Abs(rabbitPos.x - myPos.x) <= AttackRadius;
+		// && 
+		// Mathf.Abs(rabbitPos.y - myPos.y) < _rabbitWinHeight * 2;
 	}
 
 	protected override float GetAttackDirection() {

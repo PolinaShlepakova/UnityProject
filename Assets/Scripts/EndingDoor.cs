@@ -7,7 +7,7 @@ public class EndingDoor : MonoBehaviour {
 		HeroRabbit rabbit = collider.GetComponent<HeroRabbit>(); 
 		if (rabbit != null) {
 			LevelController.Current.PassLevel();
-			SceneManager.LoadScene("ChooseLevel");
+			// SceneManager.LoadScene("ChooseLevel");
 		}
 	}
 }
