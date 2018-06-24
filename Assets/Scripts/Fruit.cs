@@ -6,6 +6,7 @@ public class Fruit : Collectable {
 	private int _id;
 
 	void Start() {
+		Audio = GetComponent<AudioSource>();
 		_id = ++LevelController.Current.FruitsOverall;
 		if (LevelController.Current.IsFruitCollectedBefore(_id)) {
 			GetComponent<SpriteRenderer>().color = CollectedColor;

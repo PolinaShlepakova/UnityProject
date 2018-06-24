@@ -1,4 +1,6 @@
-﻿public class Bomb : Collectable {
+﻿using UnityEngine;
+
+public class Bomb : Collectable {
     
 	// when rabbit collects mushroom, it disappears
 	// if rabbit is small, he dies
@@ -9,7 +11,7 @@
 				rabbit.Diminish();
 			}
 			else {
-				rabbit.Die();
+				rabbit.DieOnPlatform();
 			}
 			CollectedHide();
 		}

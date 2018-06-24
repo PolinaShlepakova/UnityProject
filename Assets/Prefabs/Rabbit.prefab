@@ -120,7 +120,8 @@ MonoBehaviour:
   Speed: 4
   MaxJumpTime: 0.9
   JumpSpeed: 5
-  BgMusic: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}
+  DieSound: {fileID: 8300000, guid: 7553580dee44e4f96b2efa5f4e5e17c3, type: 3}
+  WoodenPlatformSound: {fileID: 8300000, guid: 4678dc960a2b949329a55d696cf4ec68, type: 3}
 --- !u!212 &212043050156352672
 SpriteRenderer:
   m_ObjectHideFlags: 1

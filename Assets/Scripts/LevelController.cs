@@ -5,6 +5,8 @@ public class LevelController : MonoBehaviour {
 
 	public int MaxLives = 3;
 	public int Level;
+	public AudioClip WinLevelSound;
+	public AudioClip LoseLevelSound;
 	
 	public static LevelController Current;
 	
@@ -21,6 +23,9 @@ public class LevelController : MonoBehaviour {
 
 	private float _savedTimeScale;
 
+	private AudioSource _winLevelSource;
+	private AudioSource _loseLevelSource;
+
 	public int FruitsOverall {
 		get { return _fruitsOverall; }
 		set { _fruitsOverall = value; }
@@ -36,6 +41,11 @@ public class LevelController : MonoBehaviour {
 		}
 
 		_fruits = _stats.CollectedFruits.Count;
+		
+		_winLevelSource = gameObject.AddComponent<AudioSource>();
+		_winLevelSource.clip = WinLevelSound;
+		_loseLevelSource = gameObject.AddComponent<AudioSource>();
+		_loseLevelSource.clip = LoseLevelSound;
 	}
 	
 	public void SetStartPosition(Vector3 pos) {
@@ -83,6 +93,9 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void PassLevel() {
+		if (SoundManager.Instance.IsSoundOn()) {
+			_winLevelSource.Play();
+		}
 		// save coins
 		int prevCoins = PlayerPrefs.GetInt("coins", 0);
 		PlayerPrefs.SetInt("coins", _coins + prevCoins);
@@ -102,6 +115,9 @@ public class LevelController : MonoBehaviour {
 	}
 	
 	public void FailLevel() {
+		if (SoundManager.Instance.IsSoundOn()) {
+			_loseLevelSource.Play();
+		}
 		Pause();
 		LoseLevel.Current.Show();
 	}

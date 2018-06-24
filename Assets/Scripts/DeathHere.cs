@@ -9,8 +9,7 @@ public class DeathHere : MonoBehaviour {
         
         // other can be not a rabbit
         if (rabbit != null) {
-            // inform LevelController about rabbit's death
-            LevelController.Current.OnRabbitDeath(rabbit);
+            rabbit.Die();
         }
     }
 }

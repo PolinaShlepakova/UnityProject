@@ -18,9 +18,6 @@ public class GreenOrc : Orc {
     }
 
     protected override void Attack() {
-        if(SoundManager.Instance.isSoundOn()) {
-            _attackSource.Play();
-        }
         _mode = Mode.Attack;
         _speed = RunningSpeed;
     }
@@ -58,11 +55,14 @@ public class GreenOrc : Orc {
             // orc attacks
             Kill();
             // rabbit dies
-            rabbit.Die();
+            rabbit.DieOnPlatform();
         }
     }
 
     public void Kill() {
+        if (SoundManager.Instance.IsSoundOn()) {
+            _attackSource.Play();
+        }
         _animator.SetTrigger("kill");
     }
 }

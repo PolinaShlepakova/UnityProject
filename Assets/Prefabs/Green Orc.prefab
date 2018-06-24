@@ -120,6 +120,7 @@ MonoBehaviour:
   NormalSpeed: 1
   MoveBy: {x: -4, y: 0, z: 0}
   AttackSound: {fileID: 8300000, guid: ece9b14a232f14f48ab9a5e844cb5daf, type: 3}
+  DieSound: {fileID: 8300000, guid: 0da0a61767f664de1a8b3e03d7ca4d4e, type: 3}
   RunningSpeed: 1.5
 --- !u!212 &212716983990355624
 SpriteRenderer:

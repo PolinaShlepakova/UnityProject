@@ -14,7 +14,9 @@ public class BrownOrc : Orc {
 
 	protected override void FixedUpdate() {
 		base.FixedUpdate();
-		UpdateCarrotLaunch();
+		if (_mode == Mode.Attack) {
+			UpdateCarrotLaunch();
+		}
 	}
 
 	protected override bool IsTargetInZone() {
@@ -35,9 +37,6 @@ public class BrownOrc : Orc {
 	}
 
 	protected override void Attack() {
-		if(SoundManager.Instance.isSoundOn()) {
-			_attackSource.Play();
-		}
 		_mode = Mode.Attack;
 		// turn to rabbit
 		// rabbitPosX < myPosX
@@ -79,6 +78,9 @@ public class BrownOrc : Orc {
 	}
 	
 	private void Throw() {
+		if (SoundManager.Instance.IsSoundOn()) {
+			_attackSource.Play();
+		}
 		_animator.SetBool("attack", true);
 		StartCoroutine(AnimateThrow());
 	}

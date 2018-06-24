@@ -21,7 +21,7 @@ public class Carrot : Collectable {
                 rabbit.Diminish();
             }
             else {
-                rabbit.Die();
+                rabbit.DieOnPlatform();
             }
             CollectedHide();
         }

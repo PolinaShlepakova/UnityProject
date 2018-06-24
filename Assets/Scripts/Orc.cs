@@ -7,6 +7,7 @@ public abstract class Orc : MonoBehaviour {
     public float NormalSpeed = 2;
     public Vector3 MoveBy = new Vector3(-3, 0, 0);
     public AudioClip AttackSound;
+    public AudioClip DieSound;
 
     protected Rigidbody2D _myBody;
     protected Animator _animator;
@@ -24,6 +25,7 @@ public abstract class Orc : MonoBehaviour {
     protected float _lastFlip;
 
     protected AudioSource _attackSource;
+    protected AudioSource _dieSource;
 
     protected enum Mode {
         GoToA,
@@ -54,6 +56,8 @@ public abstract class Orc : MonoBehaviour {
         
         _attackSource = gameObject.AddComponent<AudioSource>();
         _attackSource.clip = AttackSound;
+        _dieSource = gameObject.AddComponent<AudioSource>();
+        _dieSource.clip = DieSound;
     }
 
     // used for physics calculations
@@ -126,6 +130,10 @@ public abstract class Orc : MonoBehaviour {
 
     protected void Die() {
         _animator.SetBool("dead", true);
+        if (SoundManager.Instance.IsSoundOn()) {
+            _dieSource.Play();
+        }
+
         StartCoroutine(AnimateDeath());
     }
 

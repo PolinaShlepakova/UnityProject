@@ -5,8 +5,8 @@ public class HeroRabbit : MonoBehaviour {
     public float Speed = 1;
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
-    
-    public AudioClip BgMusic;
+    public AudioClip DieSound;
+    public AudioClip WoodenPlatformSound;
 
     public static HeroRabbit LastRabbit;
     
@@ -25,8 +25,9 @@ public class HeroRabbit : MonoBehaviour {
     private float _jumpTime;
     private bool _isBig;
     private bool _isBombInvulnerable;
-    
-    private AudioSource _bgMusicSource;
+
+    private AudioSource _dieSoundSource;
+    private AudioSource _woodenPlatformSoundSource;
 
     public bool IsBig {
         get { return _isBig; }
@@ -47,17 +48,17 @@ public class HeroRabbit : MonoBehaviour {
         _heroParent = transform.parent;
         _isBig = false;
         LastRabbit = this;
+        
         InitSounds();
     }
 
     private void InitSounds() {
-        // bg music
-        _bgMusicSource = gameObject.AddComponent<AudioSource>();
-        _bgMusicSource.clip = BgMusic;
-        _bgMusicSource.loop = true;
-        _bgMusicSource.Play();
+        _dieSoundSource = gameObject.AddComponent<AudioSource>();
+        _dieSoundSource.clip = DieSound;
+        
+        _woodenPlatformSoundSource = gameObject.AddComponent<AudioSource>();
+        _woodenPlatformSoundSource.clip = WoodenPlatformSound;
     }
-
 
     // Update is called once per frame (used for animations)
     private void Update() {
@@ -65,7 +66,6 @@ public class HeroRabbit : MonoBehaviour {
             AnimateRun();
             AnimateJump();
         }
-        Debug.Log("grounded: " + _isGrounded);
     }
 
     // used for physics calculations
@@ -127,6 +127,10 @@ public class HeroRabbit : MonoBehaviour {
             _isGrounded = true;
             // check if grounded to a platform
             if (hit.transform != null && hit.transform.GetComponent<MovingPlatform>() != null) {
+                // play sound of hitting wooden platform
+                if (SoundManager.Instance.IsSoundOn()) {
+                    _woodenPlatformSoundSource.Play();
+                }
                 // stick to platform by setting it as parent
                 SetNewParent(transform, hit.transform);
             }
@@ -199,6 +203,16 @@ public class HeroRabbit : MonoBehaviour {
     }
 
     public void Die() {
+        if (SoundManager.Instance.IsSoundOn()) {
+            _dieSoundSource.Play();
+        }
+        LevelController.Current.OnRabbitDeath(this);
+    }
+
+    public void DieOnPlatform() {
+        if (SoundManager.Instance.IsSoundOn()) {
+            _dieSoundSource.Play();
+        }
         _jumpActive = false;
         _jumpTime = 0;
         _animator.SetBool("run", false);
