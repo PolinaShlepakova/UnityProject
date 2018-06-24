@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1509075366063458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.89, y: 0.311, z: 0.1}
+  m_LocalPosition: {x: -7.8, y: 0.319, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,6 +120,7 @@ MonoBehaviour:
   Speed: 4
   MaxJumpTime: 0.9
   JumpSpeed: 5
+  BgMusic: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}
 --- !u!212 &212043050156352672
 SpriteRenderer:
   m_ObjectHideFlags: 1

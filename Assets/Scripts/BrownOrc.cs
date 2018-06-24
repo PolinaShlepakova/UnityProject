@@ -35,6 +35,9 @@ public class BrownOrc : Orc {
 	}
 
 	protected override void Attack() {
+		if(SoundManager.Instance.isSoundOn()) {
+			_attackSource.Play();
+		}
 		_mode = Mode.Attack;
 		// turn to rabbit
 		// rabbitPosX < myPosX

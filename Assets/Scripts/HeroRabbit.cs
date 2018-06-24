@@ -5,6 +5,8 @@ public class HeroRabbit : MonoBehaviour {
     public float Speed = 1;
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
+    
+    public AudioClip BgMusic;
 
     public static HeroRabbit LastRabbit;
     
@@ -23,6 +25,8 @@ public class HeroRabbit : MonoBehaviour {
     private float _jumpTime;
     private bool _isBig;
     private bool _isBombInvulnerable;
+    
+    private AudioSource _bgMusicSource;
 
     public bool IsBig {
         get { return _isBig; }
@@ -43,6 +47,15 @@ public class HeroRabbit : MonoBehaviour {
         _heroParent = transform.parent;
         _isBig = false;
         LastRabbit = this;
+        InitSounds();
+    }
+
+    private void InitSounds() {
+        // bg music
+        _bgMusicSource = gameObject.AddComponent<AudioSource>();
+        _bgMusicSource.clip = BgMusic;
+        _bgMusicSource.loop = true;
+        _bgMusicSource.Play();
     }
 
 
@@ -52,6 +65,7 @@ public class HeroRabbit : MonoBehaviour {
             AnimateRun();
             AnimateJump();
         }
+        Debug.Log("grounded: " + _isGrounded);
     }
 
     // used for physics calculations

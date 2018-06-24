@@ -18,6 +18,9 @@ public class GreenOrc : Orc {
     }
 
     protected override void Attack() {
+        if(SoundManager.Instance.isSoundOn()) {
+            _attackSource.Play();
+        }
         _mode = Mode.Attack;
         _speed = RunningSpeed;
     }

@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Orc : MonoBehaviour {
     public float NormalSpeed = 2;
     public Vector3 MoveBy = new Vector3(-3, 0, 0);
+    public AudioClip AttackSound;
 
     protected Rigidbody2D _myBody;
     protected Animator _animator;
@@ -22,6 +23,7 @@ public abstract class Orc : MonoBehaviour {
     protected static readonly float _timeBetweenFlips = 0.5f;
     protected float _lastFlip;
 
+    protected AudioSource _attackSource;
 
     protected enum Mode {
         GoToA,
@@ -49,6 +51,9 @@ public abstract class Orc : MonoBehaviour {
         _rabbitWinHeight *= 0.8f;
         _speed = NormalSpeed;
         _lastFlip = Time.time;
+        
+        _attackSource = gameObject.AddComponent<AudioSource>();
+        _attackSource.clip = AttackSound;
     }
 
     // used for physics calculations
